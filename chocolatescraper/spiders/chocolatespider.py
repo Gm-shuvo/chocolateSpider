@@ -1,8 +1,10 @@
 import scrapy
 from typing import List
+# import attr 
+import attrs
 
 
-from chocolatescraper.itemloader import chocolateProductItemLoader
+from chocolatescraper.itemloader import ChocolateProductLoader
 from chocolatescraper.items import ChocolateProduct
 
 class ChocolatespiderSpider(scrapy.Spider):
@@ -14,7 +16,8 @@ class ChocolatespiderSpider(scrapy.Spider):
         products = response.css('product-item')
         for product in products:
             
-            chocolate = chocolateProductItemLoader(item = ChocolateProduct(), selector=product)
+            chocolate = ChocolateProductLoader(
+                item=ChocolateProduct(), selector=product)
             
             chocolate.add_css('name', 'a.product-item-meta__title::text')
             chocolate.add_css('price', 'span.price::text', re=r'([£$€]\d+(?:\.\d{2})?)')
