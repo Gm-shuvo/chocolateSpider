@@ -60,11 +60,16 @@ ROBOTSTXT_OBEY = True
 #    "scrapy.extensions.telnet.TelnetConsole": None,
 # }
 
+MONGO_URI = 'mongodb+srv://gmshuvorucse:12345@scrapy.xf0jld1.mongodb.net/?retryWrites=true&w=majority'
+MONGO_DATABASE = 'scrapy'
+MONGO_COLLECTION = 'scrapedData'
+
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     #  "chocolatescraper.pipelines.ChocolatescraperPipeline": 300,
-    "chocolatescraper.pipelines.DuplicatesPipeline": 400
+    "chocolatescraper.pipelines.DuplicatesPipeline": 200,
+    'chocolatescraper.pipelines.MongoPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
